@@ -1,0 +1,5 @@
+---
+const { guide, lang, base } = Astro.props;
+const d=guide.data;
+---
+<a class="card guide-card" data-category={d.category} data-search={`${d.title} ${d.description}`.toLowerCase()} href={`${base}/${lang}/guides/${d.guideId}/`}><div class="category">{d.category}</div><h2>{d.title}</h2><p>{d.description}</p><div class="meta"><span>{d.minutes} min</span><span>{d.platforms.slice(0,2).join(' · ')}</span></div></a>

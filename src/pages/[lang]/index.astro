@@ -1,0 +1,11 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GuideCard from '../../components/GuideCard.astro';
+import { ui } from '../../data/ui';
+export function getStaticPaths(){return [{params:{lang:'en'}},{params:{lang:'es'}}]}
+const lang=Astro.params.lang as 'en'|'es'; const t=ui[lang]; const base=import.meta.env.BASE_URL.replace(/\/$/,'');
+const guides=(await getCollection('guides',g=>g.data.lang===lang&&g.data.status==='published')).sort((a,b)=>a.data.title.localeCompare(b.data.title));
+---
+<BaseLayout lang={lang} title={t.portal} description={t.subtitle}><section class="hero"><span class="eyebrow">{t.badge}</span><h1>{t.portal}</h1><p>{t.subtitle}</p><div class="search"><input id="hero-search" placeholder={t.search}/></div></section><div class="section-title"><small>{t.browse}</small><h2>{t.popular}</h2></div><div class="cards" id="cards">{guides.map(g=><GuideCard guide={g} lang={lang} base={base}/>)}</div><p id="empty" hidden>{t.noResults}</p>
+<script is:inline>const params=new URLSearchParams(location.search),q=(params.get('q')||'').toLowerCase(),cat=params.get('category')||'';const cards=[...document.querySelectorAll('.guide-card')];function filter(value=''){const term=(value||q).toLowerCase();let n=0;cards.forEach(c=>{const ok=(!term||c.dataset.search.includes(term))&&(!cat||c.dataset.category===cat);c.style.display=ok?'block':'none';if(ok)n++});document.querySelector('#empty').hidden=n>0}const s=document.querySelector('#hero-search');s?.addEventListener('input',e=>filter(e.target.value));filter();</script></BaseLayout>

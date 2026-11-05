@@ -1,0 +1,14 @@
+---
+import '../styles/global.css';
+import { ui, categories } from '../data/ui';
+const { lang = 'en', title, description = '' } = Astro.props;
+const t = ui[lang];
+const other = lang === 'en' ? 'es' : 'en';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<!doctype html><html lang={lang}><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width"/><meta name="description" content={description}/><title>{title}</title></head><body>
+<div class="shell"><header class="topbar"><div class="brand"><strong>{t.portal}</strong><span>{t.subtitle}</span></div><div class="search"><input id="global-search" placeholder={t.search}/></div><a class="language" href={`${base}/${other}/`}>{other.toUpperCase()}</a></header>
+<div class="layout"><aside class="sidebar"><a href={`${base}/${lang}/`}>{t.all}</a>{categories.map(c => <a href={`${base}/${lang}/?category=${c[0]}`}>{lang === 'en' ? c[1] : c[2]}</a>)}</aside><main class="content"><slot /></main></div></div>
+<script is:inline>
+const input=document.querySelector('#global-search');if(input){input.addEventListener('keydown',e=>{if(e.key==='Enter'){const q=encodeURIComponent(input.value);location.href=`${document.documentElement.dataset.base||''}?q=${q}`}})}
+</script></body></html>
