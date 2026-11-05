@@ -1,94 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teams Training Center</title>
-    <style>
-        body {
-            font-family: Segoe UI, Arial, sans-serif;
-            margin: 0;
-            background: #f3f2f1;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teams Training Center</title>
 
-        header {
-            background: #464775;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
+<style>
 
-        nav {
-            width: 250px;
-            background: white;
-            height: 100vh;
-            position: fixed;
-            left: 0;
-            top: 0;
-            padding-top: 80px;
-            border-right: 1px solid #ddd;
-        }
+body{
+    margin:0;
+    font-family:Segoe UI,Arial,sans-serif;
+    background:#f3f2f1;
+}
 
-        nav a {
-            display: block;
-            padding: 15px;
-            text-decoration: none;
-            color: #333;
-        }
+header{
+    background:#464775;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
 
-        nav a:hover {
-            background: #e1dfdd;
-        }
+.sidebar{
+    width:250px;
+    background:white;
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    overflow:auto;
+    padding-top:100px;
+    border-right:1px solid #ddd;
+}
 
-        main {
-            margin-left: 270px;
-            padding: 30px;
-        }
+.sidebar button{
+    width:100%;
+    border:none;
+    background:white;
+    text-align:left;
+    padding:15px;
+    cursor:pointer;
+    font-size:16px;
+}
 
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,.1);
-        }
-    </style>
+.sidebar button:hover{
+    background:#e1dfdd;
+}
+
+.content{
+    margin-left:270px;
+    padding:30px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 2px 5px rgba(0,0,0,.1);
+}
+
+h2{
+    color:#464775;
+}
+
+</style>
 </head>
+
 <body>
 
 <header>
-    <h1>Teams Training Center</h1>
-    <p>End User Training Portal</p>
+<h1>Teams Training Center</h1>
+<p>Bilingual User Training Portal</p>
 </header>
 
-<nav>
-    <a href="#">Meetings</a>
-    <a href="#">Audio</a>
-    <a href="#">Video</a>
-    <a href="#">Guest Access</a>
-    <a href="#">Teams Phone</a>
-    <a href="#">Poly Devices</a>
-    <a href="#">Copilot</a>
-</nav>
+<div class="sidebar">
 
-<main>
-    <div class="card">
-        <h2>Welcome</h2>
-        <p>Welcome to the Teams Training Center.</p>
-        <p>This portal will contain user guides in English and Spanish.</p>
-    </div>
+<button onclick="showTopic('home')">🏠 Home</button>
 
-    <div class="card">
-        <h2>Coming Soon</h2>
-        <ul>
-            <li>Join a Meeting</li>
-            <li>Schedule a Meeting</li>
-            <li>Add Guest Users</li>
-            <li>Transfer Calls</li>
-            <li>Poly CCX Phones</li>
-        </ul>
-    </div>
-</main>
+<button onclick="showTopic('meetings')">📅 Meetings</button>
+
+<button onclick="showTopic('audio')">📞 Audio</button>
+
+<button onclick="showTopic('video')">🎥 Video</button>
+
+<button onclick="showTopic('guest')">👤 Guest Access</button>
+
+<button onclick="showTopic('phone')">☎ Teams Phone</button>
+
+<button onclick="showTopic('poly')">📱 Poly Devices</button>
+
+<button onclick="showTopic('copilot')">🤖 Copilot</button>
+
+</div>
+
+<div class="content">
+
+<div id="contentArea" class="card">
+
+<h2>Welcome</h2>
+
+<p>
+This portal will provide Teams training guides,
+step-by-step instructions, screenshots and PDF exports.
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+function showTopic(topic){
+
+const content = document.getElementById("contentArea");
+
+if(topic==="home"){
+content.innerHTML=`
+<h2>Welcome</h2>
+<p>Choose a topic from the menu.</p>
+`;
+}
+
+if(topic==="meetings"){
+content.innerHTML=`
+<h2>Schedule a Teams Meeting</h2>
+
+<h3>Step 1</h3>
+<p>Open Outlook Calendar.</p>
+
+<h3>Step 2</h3>
+<p>Select New Teams Meeting.</p>
+
+<h3>Step 3</h3>
+<p>Add attendees and send invitation.</p>
+
+`;
+}
+
+if(topic==="audio"){
+content.innerHTML=`
+<h2>Make a Call</h2>
+
+<h3>Step 1</h3>
+<p>Open Teams.</p>
+
+<h3>Step 2</h3>
+<p>Select Calls.</p>
+
+<h3>Step 3</h3>
+<p>Enter the phone number.</p>
+
+`;
+}
+
+if(topic==="video"){
+content.innerHTML=`
+<h2>Enable Video</h2>
+
+<h3>Step 1</h3>
+<p>Join meeting.</p>
+
+<h3>Step 2</h3>
+<p>Select Camera.</p>
+
+<h3>Step 3</h3>
+<p>Choose desired camera.</p>
+
+`;
+}
+
+if(topic==="guest"){
+content.innerHTML=`
+<h2>Add Guest User</h2>
+
+<h3>Step 1</h3>
+<p>Open Teams Admin Center.</p>
+
+<h3>Step 2</h3>
+<p>Select Users.</p>
+
+<h3>Step 3</h3>
+<p>Add Guest.</p>
+
+`;
+}
+
+if(topic==="phone"){
+content.innerHTML=`
+<h2>Transfer a Call</h2>
+
+<h3>Step 1</h3>
+<p>Select Transfer.</p>
+
+<h3>Step 2</h3>
+<p>Search for the user.</p>
+
+<h3>Step 3</h3>
+<p>Complete transfer.</p>
+
+`;
+}
+
+if(topic==="poly"){
+content.innerHTML=`
+<h2>Poly CCX Devices</h2>
+
+<p>
+Training content coming soon.
+</p>
+
+`;
+}
+
+if(topic==="copilot"){
+content.innerHTML=`
+<h2>Microsoft 365 Copilot</h2>
+
+<p>
+Learn how to summarize meetings, generate content
+and increase productivity.
+</p>
+
+`;
+}
+
+}
+
+</script>
 
 </body>
 </html>
