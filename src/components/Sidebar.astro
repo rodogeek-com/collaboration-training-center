@@ -1,0 +1,12 @@
+---
+import { LayoutGrid, CircleUserRound, Settings, MessageSquare, CalendarDays, MonitorUp, Phone, Building2, UsersRound, Accessibility, Wrench } from 'lucide-astro';
+import { categories } from '../data/ui';
+interface Props { lang: 'en'|'es'; base: string; }
+const { lang, base } = Astro.props as Props;
+const icons={profile:CircleUserRound,settings:Settings,chat:MessageSquare,meetings:CalendarDays,sharing:MonitorUp,calling:Phone,rooms:Building2,external:UsersRound,accessibility:Accessibility,troubleshooting:Wrench};
+---
+<aside id="sidebar" class="sidebar" aria-label={lang==='en'?'Training topics':'Temas de capacitación'}>
+<a class="sidebar-link" href={`${base}/${lang}/`}><LayoutGrid size={18}/><span>{lang==='en'?'All topics':'Todos los temas'}</span></a>
+<div class="sidebar-divider"></div>
+{categories.map(c=>{const Icon=icons[c[0]];return <a class="sidebar-link" href={`${base}/${lang}/?category=${c[0]}`}><Icon size={18}/><span>{lang==='en'?c[1]:c[2]}</span></a>})}
+</aside><div id="sidebar-overlay" class="sidebar-overlay"></div>
